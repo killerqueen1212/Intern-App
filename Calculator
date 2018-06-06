@@ -1,0 +1,101 @@
+#include <iostream>
+#include <limits>
+
+using namespace std;
+
+int main()
+{
+    double *x = new double; //Both x and y are the values the user will input.
+    double *y = new double;
+    int *n = new int; //n is the number that is asked of the user to choose what operation the user would like to use.
+    double *result = new double;//This is the end result of the calculator.
+    char *contin = new char;//This will continue the program if the user enters the correct letter.
+    *contin = 'y'; //This is the correct letter the user should enter if they want to continue.
+
+    cout << "Hello! Welcome to Adalida's calculator!:)" << endl; //Initiates the start of the program.
+
+
+    while(*contin == 'y') //Uses while instead of for because the user might not want to continue with the program.
+    {
+
+
+   cout<<"What is the first number you would like to use?"<<endl;  //Asks for the first # to use for the calculator.
+            while(!(cin >> *x))      //Receives user input and checks to see if there is a failbit.
+            {
+                cout << "Oops! Try again and this time enter a number!"<<endl;
+                cin.clear();            //Clears if there is a failbit.
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');    //Ignores the last input the user entered.
+            }
+
+            cout<<"What is the second number you would like to use?"<<endl; //Asks user for the second # to use for the calculator.
+            while(!(cin >> *y))      //Receives user input and checks to see if there is a failbit.
+            {
+                cout << "Oops! Try again and this time enter a number!"<<endl;
+                cin.clear();            //Clears if there is a failbit.
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');    //Ignores the last input the user entered.
+            }
+
+            cout << "Enter the symbol you would like to use."<<endl; //Asks user for the operation they want to use.
+            cout << "1 for addition, 2 for subtraction, 3 for multiplication, or 4 for division." << endl;
+            while(!(cin >> *n))      //Receives the users input and checks to see if there is a failbit.
+            {
+                cout << "Try again! This time try a number that applies to the operation you want to use."<<endl;
+                cin.clear();            //Clears if there is a failbit.
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');    //Ignores the last input the user entered.
+            }
+
+
+
+        if(*n == 1)//This if statement is for addition.
+        {
+            cout << "The sum is: " << endl;
+            *result = *x + *y; // Finds the sum of x and y.
+            cout << *result << endl;//Prints the result to the user.
+
+
+        }
+
+        else if(*n == 2)//This if else statement is for subtraction.
+        {
+            cout << "The difference is: ";
+            *result = *x - *y; //Finds the difference of x and y.
+            cout << *result << endl; //Prints the result to the user.
+        }
+
+        else if(*n == 3)//This if else statement is for multiplication.
+        {
+            cout << "The product is: ";
+            *result = *x * *y; //Finds the product of x and y.
+            cout << *result << endl;//Prints the result to the user.
+        }
+        else if(*n == 4)//This if else statement is for division.
+        {
+
+            if(*y == 0)//This tells the user that if you divide by zero there is no answer for it.
+            {
+                cout << "Invalid cannot divide something by 0, please try again." << endl;
+            }
+            else // If there is no problem with 0, it will jump to else and continue with the division section of the function.
+            {
+                cout << "The quotient is: ";
+                *result = *x / *y;//Finds the quotient of x and y.
+                cout << *result << endl;//Prints the result to the user.
+            }
+        }
+        else
+        {
+            cout << "Invalid, try again!" << endl;// This tells the user to try again if they enter a number/letter that is not allowed.
+        }
+
+        cout << "Would you like to continue? y for yes or any other button for no" << endl;//This initiates the user to decide if they want to run the program again or not.
+        cin >> *contin;
+    }
+
+    delete []x;
+    delete []y;
+    delete []result;
+    delete []n;
+    delete []contin;
+
+    return 0;
+}
